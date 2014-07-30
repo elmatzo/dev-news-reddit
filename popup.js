@@ -27,7 +27,7 @@ function getRedditData(url,time){
 			$.each(data.data.children, function (i,item){
 				var linkToThread = "http://www.reddit.com"+item.data.permalink;
 				htmlStr1 += "<div class='row'>";
-				htmlStr1 += "<a target='_blank' href='" + linkToThread +"'>";
+				htmlStr1 += "<a href='" + linkToThread +"'>";
 				htmlStr1 += "<div class='panel panel-default col-xs-12'>";
 				htmlStr1 += "<div class='panel-body'>";
 				htmlStr1 += item.data.title;
@@ -53,21 +53,23 @@ function getRedditPics(){
 			htmlStr3 = "";
 			$.each(data.data.children, function (i,item){
 				var checkForAlbum = item.data.url.indexOf("/a/");
-				if(checkForAlbum == -1 && item.data.url.indexOf("i.imgur") > -1){
+				var checkForGall = item.data.url.indexOf("/gallery/");
+				console.log(checkForGall);
+				if(checkForAlbum == -1 && checkForGall ==-1 && item.data.url.indexOf("i.imgur") > -1){
 					htmlStr3 += "<div class='thumbnail'>";
 					htmlStr3 += "<div class='caption'>";
 					htmlStr3 += "<h4>" + item.data.title +"</h4>"
 					htmlStr3 += "</div>";
-					htmlStr3 += "<a  target='_blank' href='" + item.data.url +"'>";
+					htmlStr3 += "<a href='" + item.data.url +"'>";
 					htmlStr3 += "<img src='" + item.data.url + "'>";
 					htmlStr3 += "</a>";
 					htmlStr3 += "</div>";
-				}else if(checkForAlbum == -1 && item.data.url.indexOf("imgur") > -1){
+				}else if(checkForAlbum == -1 && checkForGall==-1 &&item.data.url.indexOf("imgur") > -1){
 					htmlStr3 += "<div class='thumbnail'>";
 					htmlStr3 += "<div class='caption'>";
 					htmlStr3 += "<h4>" + item.data.title +"</h4>"
 					htmlStr3 += "</div>";
-					htmlStr3 += "<a target='_blank' href='" + item.data.url.substring(0,7) + "i." + item.data.url.substring(7) +".jpg'>";
+					htmlStr3 += "<a href='" + item.data.url.substring(0,7) + "i." + item.data.url.substring(7) +".jpg'>";
 					htmlStr3 += "<img src='" + item.data.url.substring(0,7) + "i." + item.data.url.substring(7) + ".jpg'>"
 					htmlStr3 += "</a>";
 					htmlStr3 += "</div>";
